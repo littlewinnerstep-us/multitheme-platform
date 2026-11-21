@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multitheme — Multi-Tenant & Multi-Warehouse Back Office</title>
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <div id="auth-screen" class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand-head">
+        <span class="badge">MULTI-TENANT · MULTI-WAREHOUSE</span>
+        <h1>Store & Platform Back Office</h1>
+        <p>Manage warehouses, inter-warehouse stock transfers, tenant catalogs, orders, and storefront themes.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-auth-tab="login">Sign In</button>
+        <button class="tab-btn" data-auth-tab="signup">Create New Store</button>
+      </div>
+
+      <form id="login-form">
+        <div class="field">
+          <label>Store Slug (leave empty for Platform Super-Admin)</label>
+          <input id="l-store" placeholder="e.g. trove-market, fresh-harvest, urban-pantry" value="trove-market">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input id="l-email" type="email" value="owner@trove-market.test" required>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input id="l-pass" type="password" value="demo-password-1" required>
+        </div>
+        <div id="login-err" class="err-box" hidden></div>
+        <button type="submit" class="btn btn-primary w-full">Sign In to Back Office</button>
+
+        <div class="demo-logins">
+          <div class="demo-title">Quick Demo Logins:</div>
+          <div class="demo-btns">
+            <button type="button" class="btn btn-sm" data-demo="trove-market|owner@trove-market.test|demo-password-1">Trove Market Owner</button>
+            <button type="button" class="btn btn-sm" data-demo="fresh-harvest|owner@fresh-harvest.test|demo-password-1">Fresh Harvest Owner</button>
+            <button type="button" class="btn btn-sm" data-demo="urban-pantry|owner@urban-pantry.test|demo-password-1">Urban Pantry Owner</button>
+            <button type="button" class="btn btn-sm" data-demo="|admin@platform.test|demo-admin-pass">Platform Super-Admin</button>
+          </div>
+        </div>
+      </form>
+
+      <form id="signup-form" hidden>
+        <div class="grid-2">
+          <div class="field"><label>Store Name *</label><input id="s-name" placeholder="My Market" required></div>
+          <div class="field"><label>Store Slug *</label><input id="s-slug" placeholder="my-market" required></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Owner Email *</label><input id="s-email" type="email" required></div>
+          <div class="field"><label>Password (min 6 chars) *</label><input id="s-pass" type="password" required></div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Initial Warehouse Name</label><input id="s-wh" value="Main Warehouse"></div>
+          <div class="field"><label>City</label><input id="s-city" value="New York"></div>
+        </div>
+        <div id="signup-msg" class="ok-box" hidden></div>
+        <div id="signup-err" class="err-box" hidden></div>
+        <button type="submit" class="btn btn-primary w-full">Register Store Tenant</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="app-shell" hidden>
+    <header class="topbar">
+      <div class="topbar-left">
+        <strong id="hdr-title">Back Office</strong>
+        <span id="hdr-badge" class="badge"></span>
+      </div>
+      <div class="topbar-right">
+        <select id="super-tenant-picker" class="select-sm" hidden></select>
+        <a id="open-shop-link" href="/" target="_blank" class="btn btn-sm">Open Storefront ↗</a>
+        <button id="logout-btn" class="btn btn-sm">Sign Out</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <nav id="nav-tabs">
+          <button class="nav-btn active" data-tab="overview">📊 Overview</button>
+          <button class="nav-btn" data-tab="warehouses">🏭 Warehouses & Transfers</button>
+          <button class="nav-btn" data-tab="stock">📦 Stock Matrix & Ledger</button>
+          <button class="nav-btn" data-tab="products">🛒 Products & Variants</button>
+          <button class="nav-btn" data-tab="orders">🧾 Orders & Routing</button>
+          <button class="nav-btn" data-tab="marketing">🎟️ Zones & Coupons</button>
+          <button class="nav-btn" data-tab="settings">🎨 Store Theme & Routing</button>
+          <button class="nav-btn" data-tab="super" id="nav-super" hidden>🌐 Super-Admin Tenants</button>
+        </nav>
+      </aside>
+      <main class="main" id="tab-content"></main>
+    </div>
+  </div>
+
+  <script src="/admin.js" defer></script>
+</body>
+</html>

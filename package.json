@@ -1,0 +1,15 @@
+{
+  "name": "multitheme-platform",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Hyper Trove storefront with multi-tenant & multi-warehouse e-commerce backend",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
